@@ -7,10 +7,8 @@ import java.util.Date;
 import java.util.List;
 @Data
 public class FarmacoRequestDto {
-
-    private Integer idfarmaco;
     private String nombrefarmaco;
     private String composicion;
     private Date FechaVencimiento;
-    private List<FarmacoRequestDto> mascotas = new ArrayList<>();
+    private List<CategoriaRequetDto> categoria  = new ArrayList<>();
 }
