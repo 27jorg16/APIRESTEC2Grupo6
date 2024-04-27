@@ -6,6 +6,7 @@ import pe.edu.cibertec.APIRESTEC2Grupo6.models.bd.Farmaco;
 
 
 @Repository
-public interface farmacoRepository extends JpaRepository<Farmaco, Integer> {
+public interface FarmacoRepository extends
+        JpaRepository<Farmaco, Integer> {
 
 }
