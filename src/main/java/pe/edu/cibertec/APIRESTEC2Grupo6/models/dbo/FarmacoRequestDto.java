@@ -12,5 +12,5 @@ public class FarmacoRequestDto {
     private String nombrefarmaco;
     private String composicion;
     private Date FechaVencimiento;
-    private List<FarmacoRequestDto> mascotas = new ArrayList<>();
+
 }
