@@ -1,20 +1,38 @@
 package pe.edu.cibertec.APIRESTEC2Grupo6.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
+import pe.edu.cibertec.APIRESTEC2Grupo6.models.bd.Categoria;
 import pe.edu.cibertec.APIRESTEC2Grupo6.models.bd.Farmaco;
+import pe.edu.cibertec.APIRESTEC2Grupo6.models.dbo.CategoriaRequetDto;
+import pe.edu.cibertec.APIRESTEC2Grupo6.models.dbo.FarmacoRequestDto;
 import pe.edu.cibertec.APIRESTEC2Grupo6.repository.FarmacoRepository;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Service
 public class FarmacoService implements iFarmacoService {
-
-    @Autowired
     private FarmacoRepository farmacoRepository;
+    private ICategoriaService iCategoriaService;
 
+    @Transactional
     @Override
-    public List<Farmaco> getAllFarmacos() {
-        return farmacoRepository.findAll();
+    public Farmaco registrarFarmaco(FarmacoRequestDto farmacoRequestDto) {
+       Farmaco farmaco = new Farmaco();
+       farmaco.setNombrefarmaco(farmacoRequestDto.getNombrefarmaco());
+       farmaco.setComposicion(farmacoRequestDto.getComposicion());
+       farmaco.setFechaVencimiento(farmacoRequestDto.getFechaVencimiento());
+       Farmaco nuevoFarmaco = farmacoRepository.save(farmaco);
+        Categoria categoria;
+        for (CategoriaRequetDto categoriaRequetDto: farmacoRequestDto.getCategoria()){
+            categoria = new Categoria();
+            categoria.setNomCategoria(categoriaRequetDto.getNomCategoria());
+            categoria.setDescripCategoria(categoriaRequetDto.getDescripCategoria());
+            categoria.setFechaRegistro(categoriaRequetDto.getFechaRegistro());
+        }
+        return nuevoFarmaco;
     }
 }
+

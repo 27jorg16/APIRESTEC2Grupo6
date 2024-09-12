@@ -6,17 +6,23 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@NoArgsConstructor
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "Categoria")
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCategoria;
+    @Column(name = "IdCategoria")
+    private Long idCategoria;
 
+    @Column(name = "NomCategoria")
     private String nomCategoria;
+
+    @Column(name = "DescripCategoria")
     private String descripCategoria;
+
+    @Column(name = "FechaRegistro")
     private Date fechaRegistro;
 
     @ManyToOne
